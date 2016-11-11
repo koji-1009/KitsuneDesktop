@@ -1,0 +1,9 @@
+total = 2
+repeat = 1
+disappear = 0
+
+Animation/spin01.png
+interval = 2
+
+Animation/spin02.png
+interval = 2

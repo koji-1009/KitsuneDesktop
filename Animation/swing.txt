@@ -1,0 +1,18 @@
+total = 5
+repeat = 0
+disappear = 0
+
+Animation/batter01.png
+interval = 1
+
+Animation/batter02.png
+interval = 1
+
+Animation/batter03.png
+interval = 5
+
+Animation/batter04.png
+interval = 5
+
+Animation/batter01.png
+interval = 1

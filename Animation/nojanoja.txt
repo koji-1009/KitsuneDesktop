@@ -1,0 +1,9 @@
+total = 2
+repeat = 1
+disappear = 0
+
+Animation/nojanoja01.png
+interval = 7
+
+Animation/nojanoja02.png
+interval = 7
