@@ -1,25 +1,26 @@
 package com.sf_lolitahag.motions;
 
-import com.sf_lolitahag.motions.pitchs.AbstractPitch;
-import com.sf_lolitahag.motions.pitchs.Straight;
-import com.sf_lolitahag.motions.pitchs.Struck;
+import com.sf_lolitahag.motions.pitchs.*;
 
 import javax.swing.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Ball extends BaseMotion {
 
     private static final int AXIS_X = 475;
     private static final int AXIS_Y = 245;
     private static final int PAINT_INTERVAL = 20;
-    private static final int HIT_ZONE_START = 500;
-    private static final int HIT_ZONE_END = 600;
+    private static final int PAINT_INTERVAL_SPIN = 25;
+    private static final int HIT_ZONE_START = 520;
+    private static final int HIT_ZONE_END = 620;
     private static final String[] BALL = {"ball01"};
     private static final String[] BALL_SPIN = {"spin01", "spin02"};
     private int mIndex = 0;
-    private long mStartTime;
     private Callback mCallback;
     private AbstractPitch mPitch;
-    private Timer mTimer = new Timer(PAINT_INTERVAL, (e) -> updatePosition());
+    private Timer mSpinTimer = new Timer(PAINT_INTERVAL_SPIN, (e) -> updateSpin());
+    private Timer mTimer = new Timer(PAINT_INTERVAL, (e) -> updateBallView());
 
     public Ball(Callback callback) {
         mCallback = callback;
@@ -37,12 +38,21 @@ public class Ball extends BaseMotion {
     public void startPitch() {
         getPitchRand();
         mIsShow = true;
-        mStartTime = System.currentTimeMillis();
         mTimer.start();
     }
 
     private void getPitchRand() {
-        mPitch = new Straight();
+        switch (BallType.getBallType()) {
+            case STRAIGHT:
+                mPitch = new Straight();
+                break;
+            case FAST:
+                mPitch = new Fast();
+                break;
+            case MAKYU:
+                mPitch = new Makyu();
+                break;
+        }
     }
 
     public void isHit(boolean isHit) {
@@ -51,16 +61,23 @@ public class Ball extends BaseMotion {
         }
     }
 
-    private void updatePosition() {
-        int updateX = mPitch.getUpdateX(mStartTime);
+    private void updateBallView() {
+        int updateX = mPitch.getUpdateX(mAxisX);
         mAxisX += updateX;
-        int updateY = mPitch.getUpdateY(mStartTime);
+        int updateY = mPitch.getUpdateY(mAxisY);
         mAxisY += updateY;
-        // mPitch.isSpin();
         if (mAxisY >= HIT_ZONE_START && mAxisY <= HIT_ZONE_END) {
             BallState.getInstance().setHit(true);
         } else {
             BallState.getInstance().setHit(false);
+        }
+
+        if (mPitch.isSpin()) {
+            mSpinTimer.start();
+        } else {
+            mSpinTimer.stop();
+            mIndex = 0;
+            mFileName = BALL[mIndex];
         }
 
         checkFinish(updateY);
@@ -72,6 +89,31 @@ public class Ball extends BaseMotion {
             mTimer.stop();
             mCallback.onFinishPitch(axisY >= 800);
             init();
+        }
+    }
+
+    private void updateSpin() {
+        if (mIndex == 0) {
+            mIndex = 1;
+        } else if (mIndex == 1) {
+            mIndex = 0;
+        }
+        mFileName = BALL_SPIN[mIndex];
+    }
+
+    private enum BallType {
+        STRAIGHT,
+        FAST,
+        MAKYU;
+
+        public static BallType getBallType() {
+            int index = (int) (Math.random() * BallType.values().length);
+            return getBallTypeByIndex(index);
+        }
+
+        private static BallType getBallTypeByIndex(int index) {
+            List<BallType> objects = Arrays.asList(BallType.values());
+            return objects.get(index);
         }
     }
 

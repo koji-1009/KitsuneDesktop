@@ -1,8 +1,8 @@
 package com.sf_lolitahag.motions.pitchs;
 
-public class Struck extends AbstractPitch {
+public class Fast extends AbstractPitch {
 
-    private static final int BALL_SPEED = -80;
+    private static final int BALL_SPEED = 40;
 
     @Override
     public int getUpdateX(int currentX) {

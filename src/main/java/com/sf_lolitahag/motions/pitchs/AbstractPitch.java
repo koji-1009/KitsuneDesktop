@@ -3,19 +3,10 @@ package com.sf_lolitahag.motions.pitchs;
 public abstract class AbstractPitch {
 
     protected static final int NONE = 0;
-    protected boolean mIsSpin = false;
-    protected int mUpdateX = NONE;
-    protected int mUpdateY = NONE;
 
-    public int getUpdateX(long startTime) {
-        return mUpdateX;
-    }
+    public abstract int getUpdateX(int currentX);
 
-    public int getUpdateY(long startTime) {
-        return mUpdateY;
-    }
+    public abstract int getUpdateY(int currentY);
 
-    public boolean isSpin() {
-        return mIsSpin;
-    }
+    public abstract boolean isSpin();
 }
