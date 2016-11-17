@@ -12,8 +12,8 @@ public class Batter extends BaseMotion {
     private static final String SHADOW = "shadow01";
     private static final String[] BATTER_MISS = {"batter01", "batter04", "batter03", "batter01"};
     private static final String[] BATTER_HIT = {"batter01", "batter02", "batter03", "batter01"};
-    private boolean mIsHit;
     private int mIndex;
+    private boolean mIsHit;
     private Timer mTimer = new Timer(PAINT_INTERVAL, (e) -> updateFileName());
 
     public Batter() {

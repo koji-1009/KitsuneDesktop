@@ -7,7 +7,7 @@ public abstract class BaseMotion {
     protected int mAxisShadowX = 0;
     protected int mAxisShadowY = 0;
     protected String mFileName = "";
-    protected String mFileNameShadow = null;
+    protected String mFileNameShadow = "";
     protected boolean mIsShow = true;
 
     public final int getAxisX() {

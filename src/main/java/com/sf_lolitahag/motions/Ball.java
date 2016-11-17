@@ -13,7 +13,7 @@ public class Ball extends BaseMotion {
     private static final int PAINT_INTERVAL = 20;
     private static final int PAINT_INTERVAL_SPIN = 25;
     private static final int HIT_ZONE_START = 520;
-    private static final int HIT_ZONE_END = 620;
+    private static final int HIT_ZONE_END = 600;
     private static final String[] BALL = {"ball01"};
     private static final String[] BALL_SPIN = {"spin01", "spin02"};
     private int mIndex = 0;
@@ -30,7 +30,6 @@ public class Ball extends BaseMotion {
     private void init() {
         mAxisX = AXIS_X;
         mAxisY = AXIS_Y;
-        mIndex = 0;
         mFileName = BALL[mIndex];
         mIsShow = false;
     }
