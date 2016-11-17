@@ -1,0 +1,30 @@
+group 'com.sf_lolitahag'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.sf_lolitahag.Main'
+def executableBaseName = "KitsuneDesktop"
+
+task executableJar(type: Jar, dependsOn: jar)  {
+    archiveName = "${executableBaseName}.jar"
+    manifest {
+        attributes 'Main-Class' : mainClassName
+    }
+
+    from configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
+    from "$buildDir/classes/main"
+    from "$buildDir/resources/main"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

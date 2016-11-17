@@ -1,6 +1,0 @@
-total = 1
-repeat = 1
-disappear = 0
-
-Animation/shadow01.png
-interval = 1

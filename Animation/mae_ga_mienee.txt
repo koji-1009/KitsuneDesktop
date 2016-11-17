@@ -1,6 +1,0 @@
-total = 1
-repeat = 1
-disappear = 0
-
-Animation/mae_ga_mienee.png
-interval = 3
