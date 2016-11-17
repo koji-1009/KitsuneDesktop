@@ -2,7 +2,10 @@ package com.sf_lolitahag.motions;
 
 import javax.swing.*;
 
-public class Batter extends BaseMotion {
+/**
+ * バッター実装
+ */
+public class Batter extends AbstractMotion {
 
     private static final int AXIS_X = 200;
     private static final int AXIS_Y = 475;
@@ -12,7 +15,7 @@ public class Batter extends BaseMotion {
     private static final String SHADOW = "shadow01";
     private static final String[] BATTER_MISS = {"batter01", "batter04", "batter03", "batter01"};
     private static final String[] BATTER_HIT = {"batter01", "batter02", "batter03", "batter01"};
-    private int mIndex;
+    private int mIndex = 0;
     private boolean mIsHit;
     private Timer mTimer = new Timer(PAINT_INTERVAL, (e) -> updateFileName());
 
@@ -23,7 +26,6 @@ public class Batter extends BaseMotion {
         mAxisShadowY = SHADOW_Y;
         mFileNameShadow = SHADOW;
 
-        mIndex = 0;
         mFileName = BATTER_HIT[mIndex];
         mIsHit = false;
     }

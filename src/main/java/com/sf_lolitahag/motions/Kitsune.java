@@ -2,7 +2,10 @@ package com.sf_lolitahag.motions;
 
 import javax.swing.*;
 
-public class Kitsune extends BaseMotion {
+/**
+ * きつね（ロリババア）実装
+ */
+public class Kitsune extends AbstractMotion {
 
     private static final int AXIS_X = 400;
     private static final int AXIS_Y = 100;
@@ -33,12 +36,7 @@ public class Kitsune extends BaseMotion {
         startThrow();
     }
 
-    private void startThrow() {
-        mMode = MODE.THROW;
-        mTimer.start();
-    }
-
-    public void showResult(boolean isWin) {
+    public void showWinOrLosePose(boolean isWin) {
         if (isWin) {
             mMode = MODE.WIN;
         } else {
@@ -46,12 +44,6 @@ public class Kitsune extends BaseMotion {
         }
         updateFileName();
         mTimer.start();
-    }
-
-    private void updateConfig() {
-        updateFileName();
-        mIndex++;
-        checkAnimationFinish();
     }
 
     private void checkAnimationFinish() {
@@ -79,6 +71,17 @@ public class Kitsune extends BaseMotion {
                 break;
         }
 
+    }
+
+    private void startThrow() {
+        mMode = MODE.THROW;
+        mTimer.start();
+    }
+
+    private void updateConfig() {
+        updateFileName();
+        mIndex++;
+        checkAnimationFinish();
     }
 
     private void updateFileName() {

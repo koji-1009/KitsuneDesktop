@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Utils {
 
-    public static BufferedImage getImageFromRes(final Class Class, final String fileName) {
+    public static BufferedImage getImageFromResources(final Class Class, final String fileName) {
         if (fileName == null || fileName.equals("")) {
             return null;
         }

@@ -4,9 +4,9 @@ import com.sf_lolitahag.Utils;
 
 import java.awt.*;
 
-public class TitlePanel extends BasePanel {
+public class TitlePanel extends AbstractPanel {
 
-    private static final String TITLE_PNG = "title";
+    private static final String TITLE = "title";
     private Callback mCallback;
 
     public TitlePanel(Callback callback) {
@@ -15,11 +15,11 @@ public class TitlePanel extends BasePanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.drawImage(Utils.getImageFromRes(getClass(), TITLE_PNG), 0, 0, null);
+        g.drawImage(Utils.getImageFromResources(getClass(), TITLE), 0, 0, null);
     }
 
     @Override
-    public void onSpaceTap() {
+    public void onSpaceKeyPress() {
         mCallback.gotoGamePanel();
     }
 

@@ -6,7 +6,10 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class Ball extends BaseMotion {
+/**
+ * ボール実装
+ */
+public class Ball extends AbstractMotion {
 
     private static final int AXIS_X = 475;
     private static final int AXIS_Y = 245;
@@ -27,17 +30,23 @@ public class Ball extends BaseMotion {
         init();
     }
 
+    public void startPitch() {
+        getPitchRand();
+        mIsShow = true;
+        mTimer.start();
+    }
+
+    public void isHit(boolean isHit) {
+        if (isHit) {
+            mPitch = new Struck();
+        }
+    }
+
     private void init() {
         mAxisX = AXIS_X;
         mAxisY = AXIS_Y;
         mFileName = BALL[mIndex];
         mIsShow = false;
-    }
-
-    public void startPitch() {
-        getPitchRand();
-        mIsShow = true;
-        mTimer.start();
     }
 
     private void getPitchRand() {
@@ -51,12 +60,6 @@ public class Ball extends BaseMotion {
             case MAKYU:
                 mPitch = new Makyu();
                 break;
-        }
-    }
-
-    public void isHit(boolean isHit) {
-        if (isHit) {
-            mPitch = new Struck();
         }
     }
 

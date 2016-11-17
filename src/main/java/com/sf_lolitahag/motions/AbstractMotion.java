@@ -1,6 +1,10 @@
 package com.sf_lolitahag.motions;
 
-public abstract class BaseMotion {
+/**
+ * パネル上で表示するオブジェクトのBaseクラス
+ * 必要に応じてオブジェクトのResources名とX軸、Y軸、影の有無をOverrideする
+ */
+public abstract class AbstractMotion {
 
     protected int mAxisX = 0;
     protected int mAxisY = 0;

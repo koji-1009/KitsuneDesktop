@@ -1,5 +1,8 @@
 package com.sf_lolitahag.motions;
 
+/**
+ * ボールの状態を保持するSingleton
+ */
 public class BallState {
 
     private static BallState ourInstance = new BallState();
