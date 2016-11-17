@@ -38,7 +38,7 @@ public class Ball extends AbstractMotion {
 
     public void isHit(boolean isHit) {
         if (isHit) {
-            mPitch = new Struck();
+            mPitch = new Liner();
         }
     }
 

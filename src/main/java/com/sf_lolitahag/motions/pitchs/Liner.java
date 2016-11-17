@@ -1,6 +1,6 @@
 package com.sf_lolitahag.motions.pitchs;
 
-public class Struck extends AbstractPitch {
+public class Liner extends AbstractPitch {
 
     private static final int BALL_SPEED = -80;
 
