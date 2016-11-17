@@ -19,7 +19,7 @@ public class FrameInstance implements KeyListener {
     public FrameInstance() {
         initFrame();
 
-        mPanel = new TitlePanel(() -> changePanel());
+        mPanel = new TitlePanel(this::changePanel);
         mFrame.add(mPanel);
         mFrame.setVisible(true);
     }

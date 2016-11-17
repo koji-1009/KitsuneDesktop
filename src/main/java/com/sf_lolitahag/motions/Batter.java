@@ -4,32 +4,28 @@ import javax.swing.*;
 
 public class Batter extends BaseMotion {
 
-    private static final String[] BATTER_HIT = {"batter01", "batter04", "batter03"};
-    private static final String[] BATTER_MISS = {"batter01", "batter02", "batter03"};
-
-    private static final int PAINT_INTERVAL = 200;
     private static final int AXIS_X = 200;
     private static final int AXIS_Y = 475;
     private static final int SHADOW_X = 300;
     private static final int SHADOW_Y = 680;
-
-    private boolean mIsHit = false;
-    private int mIndex = 0;
+    private static final int PAINT_INTERVAL = 75;
+    private static final String[] BATTER_MISS = {"batter01", "batter04", "batter03", "batter01"};
+    private static final String[] BATTER_HIT = {"batter01", "batter02", "batter03", "batter01"};
+    private static final String SHADOW = "shadow01";
+    private boolean mIsHit;
+    private int mIndex;
     private Timer mTimer = new Timer(PAINT_INTERVAL, (e) -> updateFileName());
 
     public Batter() {
         mAxisX = AXIS_X;
         mAxisY = AXIS_Y;
+        mAxisShadowX = SHADOW_X;
+        mAxisShadowY = SHADOW_Y;
+        mFileNameShadow = SHADOW;
+
+        mIndex = 0;
         mFileName = BATTER_HIT[mIndex];
         mIsHit = false;
-    }
-
-    public int getShadowX() {
-        return SHADOW_X;
-    }
-
-    public int getShadowY() {
-        return SHADOW_Y;
     }
 
     public void startSwing(boolean isHit) {
@@ -38,18 +34,12 @@ public class Batter extends BaseMotion {
     }
 
     private void updateFileName() {
-        if (mIndex >= 2) {
-            mTimer.stop();
-            finishSwing();
-        } else {
-            mIndex++;
-        }
-
+        mIndex++;
         mFileName = mIsHit ? BATTER_HIT[mIndex] : BATTER_MISS[mIndex];
-    }
-
-    private void finishSwing() {
-        mIsHit = false;
-        mIndex = 0;
+        if (mIndex >= 3) {
+            mTimer.stop();
+            mIndex = 0;
+            mIsHit = false;
+        }
     }
 }

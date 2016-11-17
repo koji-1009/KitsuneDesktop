@@ -4,7 +4,10 @@ public abstract class BaseMotion {
 
     protected int mAxisX = 0;
     protected int mAxisY = 0;
+    protected int mAxisShadowX = 0;
+    protected int mAxisShadowY = 0;
     protected String mFileName = "";
+    protected String mFileNameShadow = null;
     protected boolean mIsShow = true;
 
     public final int getAxisX() {
@@ -15,8 +18,20 @@ public abstract class BaseMotion {
         return mAxisY;
     }
 
+    public final int getAxisShadowX() {
+        return mAxisShadowX;
+    }
+
+    public final int getAxisShadowY() {
+        return mAxisShadowY;
+    }
+
     public final String getFileName() {
         return mFileName;
+    }
+
+    public final String getFileNameShadow() {
+        return mFileNameShadow;
     }
 
     public final boolean isShow() {

@@ -7,6 +7,10 @@ import java.io.IOException;
 public class Utils {
 
     public static BufferedImage getImageFromRes(final Class Class, final String fileName) {
+        if (fileName == null || fileName.equals("")) {
+            return null;
+        }
+
         try {
             return ImageIO.read(Class.getResource("/" + fileName + ".png"));
         } catch (IOException e) {
