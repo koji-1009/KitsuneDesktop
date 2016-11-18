@@ -11,11 +11,16 @@ public class Utils {
             return null;
         }
 
+        BufferedImage image = null;
         try {
-            return ImageIO.read(Class.getResource("/" + fileName + ".png"));
+            image = ImageIO.read(Class.getResource("/" + fileName + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+
+        if (image == null) {
+            System.err.println(fileName + " is not found. return null.");
+        }
+        return image;
     }
 }
