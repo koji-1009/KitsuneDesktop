@@ -4,6 +4,8 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'application'
 
+version = 1.0
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -19,6 +21,12 @@ task executableJar(type: Jar, dependsOn: jar)  {
     from configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
     from "$buildDir/classes/main"
     from "$buildDir/resources/main"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
 }
 
 repositories {
