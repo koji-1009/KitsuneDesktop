@@ -39,14 +39,14 @@ public abstract class AbstractMotion {
         return mAxisShadowY;
     }
 
-    public final Image getFileName() {
+    public final Image getBodyImage() {
         if (mFileName.equals(EMPTY)) {
             return null;
         }
         return mCache.get(mFileName);
     }
 
-    public final Image getFileNameShadow() {
+    public final Image getShadowImage() {
         if (mFileNameShadow.equals(EMPTY)) {
             return null;
         }

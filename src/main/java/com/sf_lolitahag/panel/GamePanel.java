@@ -48,8 +48,8 @@ public class GamePanel extends AbstractPanel {
         g.drawImage(mImage, 0, 0, null);
         mMotionList.forEach(motion -> {
             if (motion.isShow()) {
-                g.drawImage(motion.getFileNameShadow(), motion.getAxisShadowX(), motion.getAxisShadowY(), null);
-                g.drawImage(motion.getFileName(), motion.getAxisX(), motion.getAxisY(), null);
+                g.drawImage(motion.getShadowImage(), motion.getAxisShadowX(), motion.getAxisShadowY(), null);
+                g.drawImage(motion.getBodyImage(), motion.getAxisX(), motion.getAxisY(), null);
             }
         });
     }
