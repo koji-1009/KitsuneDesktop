@@ -1,5 +1,7 @@
 package com.sf_lolitahag.motions;
 
+import org.ehcache.CacheManager;
+
 /**
  * パネル上で表示するオブジェクトのBaseクラス
  * 必要に応じてオブジェクトのResources名とX軸、Y軸、影の有無をOverrideする
@@ -13,6 +15,7 @@ public abstract class AbstractMotion {
     protected String mFileName = "";
     protected String mFileNameShadow = "";
     protected boolean mIsShow = true;
+    protected CacheManager mCacheManager;
 
     public final int getAxisX() {
         return mAxisX;
