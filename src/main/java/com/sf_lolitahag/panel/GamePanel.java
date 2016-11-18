@@ -15,8 +15,10 @@ public class GamePanel extends AbstractPanel {
     private Kitsune mKitsune;
     private Batter mBatter;
     private Ball mBall;
+    private final Image mImage;
 
     public GamePanel() {
+        mImage = Utils.getImageFromResources(getClass(), BACK);
         initMotions();
         startRepaintTimer();
     }
@@ -43,12 +45,11 @@ public class GamePanel extends AbstractPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        Class tmpClass = getClass();
-        g.drawImage(Utils.getImageFromResources(tmpClass, BACK), 0, 0, null);
+        g.drawImage(mImage, 0, 0, null);
         mMotionList.forEach(motion -> {
             if (motion.isShow()) {
-                g.drawImage(Utils.getImageFromResources(tmpClass, motion.getFileNameShadow()), motion.getAxisShadowX(), motion.getAxisShadowY(), null);
-                g.drawImage(Utils.getImageFromResources(tmpClass, motion.getFileName()), motion.getAxisX(), motion.getAxisY(), null);
+                g.drawImage(motion.getFileNameShadow(), motion.getAxisShadowX(), motion.getAxisShadowY(), null);
+                g.drawImage(motion.getFileName(), motion.getAxisX(), motion.getAxisY(), null);
             }
         });
     }

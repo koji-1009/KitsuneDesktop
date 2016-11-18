@@ -1,6 +1,11 @@
 package com.sf_lolitahag.motions;
 
+import com.sf_lolitahag.Utils;
+import org.ehcache.config.builders.CacheConfigurationBuilder;
+import org.ehcache.config.builders.ResourcePoolsBuilder;
+
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * きつね（ロリババア）実装
@@ -19,6 +24,7 @@ public class Kitsune extends AbstractMotion {
     private static final String[] KITSUNE_LOSE = {"mae_ga_mienee"};
     private static final String[] KITSUNE_THROW = {"stay01", "stay02", "throw01", "throw02"};
     private static final String[] KITSUNE_WIN = {"nojanoja01", "nojanoja02", "nojanoja01", "nojanoja02"};
+    private static final String[] IMAGE_LIST = {"shadow01", "stay01", "stay02", "throw01", "throw02", "nojanoja01", "nojanoja02", "mae_ga_mienee"};
     private int mIndex = 0;
     private MODE mMode = MODE.THROW;
     private Callback mCallback;
@@ -30,6 +36,13 @@ public class Kitsune extends AbstractMotion {
         mAxisShadowX = SHADOW_X;
         mAxisShadowY = SHADOW_Y;
         mFileNameShadow = SHADOW;
+
+        Class tmpClass = getClass();
+        mCache = CACHE_MANAGER.createCache("kitsune",
+                CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, Image.class, ResourcePoolsBuilder.heap(100)).build());
+        for (String fileName : IMAGE_LIST) {
+            mCache.put(fileName, Utils.getImageFromResources(tmpClass, fileName));
+        }
 
         mCallback = callback;
         updateFileName();

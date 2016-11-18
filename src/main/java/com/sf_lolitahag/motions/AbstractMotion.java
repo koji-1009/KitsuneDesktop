@@ -1,6 +1,10 @@
 package com.sf_lolitahag.motions;
 
+import org.ehcache.Cache;
 import org.ehcache.CacheManager;
+import org.ehcache.config.builders.CacheManagerBuilder;
+
+import java.awt.*;
 
 /**
  * パネル上で表示するオブジェクトのBaseクラス
@@ -8,14 +12,16 @@ import org.ehcache.CacheManager;
  */
 public abstract class AbstractMotion {
 
+    private static final String EMPTY = "";
+    protected static final CacheManager CACHE_MANAGER = CacheManagerBuilder.newCacheManagerBuilder().build(true);
     protected int mAxisX = 0;
     protected int mAxisY = 0;
     protected int mAxisShadowX = 0;
     protected int mAxisShadowY = 0;
-    protected String mFileName = "";
-    protected String mFileNameShadow = "";
+    protected String mFileName = EMPTY;
+    protected String mFileNameShadow = EMPTY;
     protected boolean mIsShow = true;
-    protected CacheManager mCacheManager;
+    protected Cache<String, Image> mCache;
 
     public final int getAxisX() {
         return mAxisX;
@@ -33,12 +39,18 @@ public abstract class AbstractMotion {
         return mAxisShadowY;
     }
 
-    public final String getFileName() {
-        return mFileName;
+    public final Image getFileName() {
+        if (mFileName.equals(EMPTY)) {
+            return null;
+        }
+        return mCache.get(mFileName);
     }
 
-    public final String getFileNameShadow() {
-        return mFileNameShadow;
+    public final Image getFileNameShadow() {
+        if (mFileNameShadow.equals(EMPTY)) {
+            return null;
+        }
+        return mCache.get(mFileNameShadow);
     }
 
     public final boolean isShow() {
