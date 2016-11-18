@@ -18,9 +18,9 @@ public abstract class AbstractMotion {
     protected int mAxisY = 0;
     protected int mAxisShadowX = 0;
     protected int mAxisShadowY = 0;
+    protected boolean mIsShow = true;
     protected String mFileName = EMPTY;
     protected String mFileNameShadow = EMPTY;
-    protected boolean mIsShow = true;
     protected Cache<String, Image> mCache;
 
     public final int getAxisX() {

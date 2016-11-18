@@ -34,7 +34,7 @@ public class Ball extends AbstractMotion {
         mCallback = callback;
 
         Class tmpClass = getClass();
-        mCache = CACHE_MANAGER.createCache("ball",
+        mCache = CACHE_MANAGER.createCache(Ball.class.getSimpleName(),
                 CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, Image.class, ResourcePoolsBuilder.heap(100)).build());
         for (String fileName : IMAGE_LIST) {
             mCache.put(fileName, Utils.getImageFromResources(tmpClass, fileName));

@@ -33,7 +33,7 @@ public class Batter extends AbstractMotion {
         mFileNameShadow = SHADOW;
 
         Class tmpClass = getClass();
-        mCache = CACHE_MANAGER.createCache("batter",
+        mCache = CACHE_MANAGER.createCache(Batter.class.getSimpleName(),
                 CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, Image.class, ResourcePoolsBuilder.heap(100)).build());
         for (String fileName : IMAGE_LIST) {
             mCache.put(fileName, Utils.getImageFromResources(tmpClass, fileName));
