@@ -1,6 +1,3 @@
-# Java class files
-*.class
-
 # Generated files
 bin/
 gen/
@@ -14,4 +11,4 @@ build/
 *.log
 
 # IntellJ IDEA
-.idea
+.idea/

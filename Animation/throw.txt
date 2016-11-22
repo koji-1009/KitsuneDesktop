@@ -1,9 +1,0 @@
-total = 2
-repeat = 0
-disappear = 0
-
-Animation/throw01.png
-interval = 15
-
-Animation/throw02.png
-interval = 7
