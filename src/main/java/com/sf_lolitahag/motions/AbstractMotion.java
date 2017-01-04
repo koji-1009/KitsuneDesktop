@@ -12,8 +12,8 @@ import java.awt.*;
  */
 public abstract class AbstractMotion {
 
-    private static final String EMPTY = "";
     protected static final CacheManager CACHE_MANAGER = CacheManagerBuilder.newCacheManagerBuilder().build(true);
+    private static final String EMPTY = "";
     protected int mAxisX = 0;
     protected int mAxisY = 0;
     protected int mAxisShadowX = 0;
