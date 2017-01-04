@@ -17,13 +17,8 @@ public class Main {
     private static AbstractPanel mPanel;
 
     public static void main(String args[]) {
-        initFrame();
-
-        mPanel = new TitlePanel(Main::changePanel);
-        mFrame.add(mPanel);
-        mFrame.setVisible(true);
+        SwingUtilities.invokeLater(Main::initFrame);
     }
-
 
     private static void initFrame() {
         mFrame = new JFrame(FRAME_TITLE);
@@ -48,6 +43,10 @@ public class Main {
                 // nop
             }
         });
+
+        mPanel = new TitlePanel(Main::changePanel);
+        mFrame.add(mPanel);
+        mFrame.setVisible(true);
     }
 
     private static void changePanel() {
