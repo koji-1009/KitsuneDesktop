@@ -24,12 +24,11 @@ public class Main {
         mFrame.setVisible(true);
     }
 
-
     private static void initFrame() {
         mFrame = new JFrame(FRAME_TITLE);
         mFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         mFrame.setLocationRelativeTo(null); //初期画面表示 位置を中央に
-        mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //CLOSEでプログラム終了
+        mFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //CLOSEでプログラム終了
         mFrame.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
