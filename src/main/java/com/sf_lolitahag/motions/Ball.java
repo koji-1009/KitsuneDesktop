@@ -17,10 +17,10 @@ public class Ball extends AbstractMotion {
 
     private static final int AXIS_X = 475;
     private static final int AXIS_Y = 245;
-    private static final int PAINT_INTERVAL = 20;
+    private static final int PAINT_INTERVAL = 40;
     private static final int PAINT_INTERVAL_SPIN = 25;
-    private static final int HIT_ZONE_START = 520;
-    private static final int HIT_ZONE_END = 600;
+    private static final int HIT_ZONE_START = 560;
+    private static final int HIT_ZONE_END = 660;
     private static final String[] BALL = {"ball01"};
     private static final String[] BALL_SPIN = {"spin01", "spin02"};
     private static final String[] IMAGE_LIST = {"ball01", "spin01", "spin02"};
