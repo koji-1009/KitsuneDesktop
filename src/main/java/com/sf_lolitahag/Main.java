@@ -17,19 +17,14 @@ public class Main {
     private static AbstractPanel mPanel;
 
     public static void main(String args[]) {
-        initFrame();
-
-        mPanel = new TitlePanel(Main::changePanel);
-        mFrame.add(mPanel);
-        mFrame.setVisible(true);
+        SwingUtilities.invokeLater(Main::initFrame);
     }
-
 
     private static void initFrame() {
         mFrame = new JFrame(FRAME_TITLE);
         mFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         mFrame.setLocationRelativeTo(null); //初期画面表示 位置を中央に
-        mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //CLOSEでプログラム終了
+        mFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //CLOSEでプログラム終了
         mFrame.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -48,6 +43,10 @@ public class Main {
                 // nop
             }
         });
+
+        mPanel = new TitlePanel(Main::changePanel);
+        mFrame.add(mPanel);
+        mFrame.setVisible(true);
     }
 
     private static void changePanel() {

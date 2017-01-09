@@ -25,9 +25,7 @@ public class GamePanel extends AbstractPanel {
 
     @Override
     public void onSpaceKeyPress() {
-        boolean isHit = BallState.getInstance().isHit();
-        mBatter.startSwing(isHit);
-        mBall.isHit(isHit);
+        mBatter.startSwing(mBall.isHit());
     }
 
     @Override

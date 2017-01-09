@@ -17,14 +17,15 @@ public class Ball extends AbstractMotion {
 
     private static final int AXIS_X = 475;
     private static final int AXIS_Y = 245;
-    private static final int PAINT_INTERVAL = 20;
+    private static final int PAINT_INTERVAL = 40;
     private static final int PAINT_INTERVAL_SPIN = 25;
-    private static final int HIT_ZONE_START = 520;
-    private static final int HIT_ZONE_END = 600;
+    private static final int HIT_ZONE_START = 560;
+    private static final int HIT_ZONE_END = 660;
     private static final String[] BALL = {"ball01"};
     private static final String[] BALL_SPIN = {"spin01", "spin02"};
     private static final String[] IMAGE_LIST = {"ball01", "spin01", "spin02"};
     private int mIndex = 0;
+    private boolean mIsHitZone;
     private Callback mCallback;
     private AbstractPitch mPitch;
     private Timer mSpinTimer = new Timer(PAINT_INTERVAL_SPIN, (e) -> updateSpin());
@@ -49,10 +50,12 @@ public class Ball extends AbstractMotion {
         mTimer.start();
     }
 
-    public void isHit(boolean isHit) {
-        if (isHit) {
+    public boolean isHit() {
+        if (mIsHitZone) {
             mPitch = new Liner();
         }
+
+        return mIsHitZone;
     }
 
     private void init() {
@@ -60,6 +63,7 @@ public class Ball extends AbstractMotion {
         mAxisY = AXIS_Y;
         mFileName = BALL[mIndex];
         mIsShow = false;
+        mIsHitZone = false;
     }
 
     private void getPitchRand() {
@@ -81,11 +85,7 @@ public class Ball extends AbstractMotion {
         mAxisX += updateX;
         int updateY = mPitch.getUpdateY(mAxisY);
         mAxisY += updateY;
-        if (mAxisY >= HIT_ZONE_START && mAxisY <= HIT_ZONE_END) {
-            BallState.getInstance().setHit(true);
-        } else {
-            BallState.getInstance().setHit(false);
-        }
+        mIsHitZone = mAxisY >= HIT_ZONE_START && mAxisY <= HIT_ZONE_END;
 
         if (mPitch.isSpin()) {
             mSpinTimer.start();
