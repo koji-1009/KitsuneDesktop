@@ -1,54 +1,59 @@
 package com.sf_lolitahag.panel;
 
 import com.sf_lolitahag.Utils;
-import com.sf_lolitahag.motions.*;
-
-import javax.swing.*;
-import java.awt.*;
+import com.sf_lolitahag.motions.AbstractMotion;
+import com.sf_lolitahag.motions.Ball;
+import com.sf_lolitahag.motions.Batter;
+import com.sf_lolitahag.motions.Kitsune;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.Timer;
 
 public class GamePanel extends AbstractPanel {
 
-    private static final String BACK = "back";
-    private static final int PAINT_INTERVAL = 30;
-    private final ArrayList<AbstractMotion> mMotionList = new ArrayList<>();
-    private final Image mImage;
-    private Kitsune mKitsune;
-    private Batter mBatter;
-    private Ball mBall;
+  private static final String BACK = "back";
+  private static final int PAINT_INTERVAL = 30;
+  private final ArrayList<AbstractMotion> motions = new ArrayList<>();
+  private final Image image;
+  private Kitsune kitsune;
+  private Batter batter;
+  private Ball ball;
 
-    public GamePanel() {
-        mImage = Utils.getImageFromResources(getClass(), BACK);
-        initMotions();
-        startRepaintTimer();
-    }
+  public GamePanel() {
+    image = Utils.getImageFromResources(getClass(), BACK);
+    initMotions();
+    startRepaintTimer();
+  }
 
-    @Override
-    public void onSpaceKeyPress() {
-        mBatter.startSwing(mBall.isHit());
-    }
+  @Override
+  public void onSpaceKeyPress() {
+    batter.startSwing(ball.isHit());
+  }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        g.drawImage(mImage, 0, 0, null);
-        mMotionList.forEach(motion -> {
-            if (motion.isShow()) {
-                g.drawImage(motion.getShadowImage(), motion.getAxisShadowX(), motion.getAxisShadowY(), null);
-                g.drawImage(motion.getBodyImage(), motion.getAxisX(), motion.getAxisY(), null);
-            }
+  @Override
+  protected void paintComponent(Graphics g) {
+    g.drawImage(image, 0, 0, null);
+    motions.forEach(
+        motion -> {
+          if (motion.isShow()) {
+            g.drawImage(
+                motion.getShadowImage(), motion.getAxisShadowX(), motion.getAxisShadowY(), null);
+            g.drawImage(motion.getBodyImage(), motion.getAxisX(), motion.getAxisY(), null);
+          }
         });
-    }
+  }
 
-    private void initMotions() {
-        mKitsune = new Kitsune(() -> mBall.startPitch());
-        mBatter = new Batter();
-        mBall = new Ball((isWin) -> mKitsune.showWinOrLosePose(isWin));
-        mMotionList.add(mKitsune);
-        mMotionList.add(mBatter);
-        mMotionList.add(mBall);
-    }
+  private void initMotions() {
+    kitsune = new Kitsune(() -> ball.startPitch());
+    batter = new Batter();
+    ball = new Ball((isWin) -> kitsune.showWinOrLosePose(isWin));
+    motions.add(kitsune);
+    motions.add(batter);
+    motions.add(ball);
+  }
 
-    private void startRepaintTimer() {
-        new Timer(PAINT_INTERVAL, (e) -> repaint()).start();
-    }
+  private void startRepaintTimer() {
+    new Timer(PAINT_INTERVAL, (e) -> repaint()).start();
+  }
 }
