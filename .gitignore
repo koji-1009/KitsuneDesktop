@@ -6,6 +6,7 @@ out/
 # Gradle files
 .gradle/
 build/
+classes/
 
 # Log Files
 *.log
