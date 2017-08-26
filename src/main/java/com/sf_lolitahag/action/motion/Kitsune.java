@@ -39,8 +39,8 @@ public class Kitsune extends AbstractMotion {
           "nojanoja01", "nojanoja02", "mae_ga_mienee");
   private int index = 0;
   private MODE mode = MODE.THROW;
-  private Callback callback;
-  private Timer timer = new Timer(PAINT_INTERVAL, (e) -> updateConfig());
+  private final Callback callback;
+  private final Timer timer = new Timer(PAINT_INTERVAL, (e) -> updateConfig());
 
   public Kitsune(Callback callback) {
     axisX = AXIS_X;

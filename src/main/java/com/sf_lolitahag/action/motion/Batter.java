@@ -33,7 +33,7 @@ public class Batter extends AbstractMotion {
       Arrays.asList("shadow01", "batter01", "batter02", "batter03", "batter04");
   private int index = 0;
   private boolean isHit;
-  private Timer timer = new Timer(PAINT_INTERVAL, (e) -> updateFileName());
+  private final Timer timer = new Timer(PAINT_INTERVAL, (e) -> updateFileName());
 
   public Batter() {
     axisX = AXIS_X;

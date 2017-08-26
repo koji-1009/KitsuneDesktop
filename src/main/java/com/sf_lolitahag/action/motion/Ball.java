@@ -36,10 +36,10 @@ public class Ball extends AbstractMotion {
   private static final List<String> IMAGE_LIST = Arrays.asList("ball01", "spin01", "spin02");
   private int index = 0;
   private boolean isHitZone;
-  private Callback callback;
+  private final Callback callback;
   private IPitch pitch;
-  private Timer spinTimer = new Timer(PAINT_INTERVAL_SPIN, (e) -> updateSpin());
-  private Timer paintTimer = new Timer(PAINT_INTERVAL, (e) -> updateBallView());
+  private final Timer spinTimer = new Timer(PAINT_INTERVAL_SPIN, (e) -> updateSpin());
+  private final Timer paintTimer = new Timer(PAINT_INTERVAL, (e) -> updateBallView());
 
   public Ball(Callback callback) {
     this.callback = callback;

@@ -12,7 +12,7 @@ import java.awt.Graphics;
 public class TitlePanel extends AbstractPanel {
 
   private static final String TITLE = "title";
-  private Callback callback;
+  private final Callback callback;
 
   public TitlePanel(Callback callback) {
     this.callback = callback;
