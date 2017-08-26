@@ -30,8 +30,7 @@ public class Main {
   private static void initFrame() {
     frame = new JFrame(FRAME_TITLE);
     frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-    frame.setLocationRelativeTo(null); //初期画面表示 位置を中央に
-    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //CLOSEでプログラム終了
+    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.addKeyListener(
         new KeyListener() {
           @Override
@@ -41,8 +40,10 @@ public class Main {
 
           @Override
           public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-              panel.onSpaceKeyPress();
+            switch (e.getKeyCode()) {
+              case KeyEvent.VK_SPACE:
+                panel.onSpaceKeyPress();
+                break;
             }
           }
 

@@ -4,10 +4,13 @@ Copyright (C) 2016 Masanori Kojima
 Released under the MIT license
 http://opensource.org/licenses/mit-license.php
 */
-package com.sf_lolitahag.motions;
+package com.sf_lolitahag.action.motion;
 
 import com.sf_lolitahag.Utils;
 import java.awt.Image;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.Timer;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
@@ -26,21 +29,14 @@ public class Kitsune extends AbstractMotion {
   private static final int[] WIN_ANIMATION = {0, 1, 0, 1, 0, 1};
   private static final int[] LOSE_ANIMATION = {0};
   private static final String SHADOW = "shadow01";
-  private static final String[] KITSUNE_LOSE = {"mae_ga_mienee"};
-  private static final String[] KITSUNE_THROW = {"stay01", "stay02", "throw01", "throw02"};
-  private static final String[] KITSUNE_WIN = {
-      "nojanoja01", "nojanoja02", "nojanoja01", "nojanoja02"
-  };
-  private static final String[] IMAGE_LIST = {
-      "shadow01",
-      "stay01",
-      "stay02",
-      "throw01",
-      "throw02",
-      "nojanoja01",
-      "nojanoja02",
-      "mae_ga_mienee"
-  };
+  private static final List<String> KITSUNE_LOSE = Collections.singletonList("mae_ga_mienee");
+  private static final List<String> KITSUNE_THROW =
+      Arrays.asList("stay01", "stay02", "throw01", "throw02");
+  private static final List<String> KITSUNE_WIN =
+      Arrays.asList("nojanoja01", "nojanoja02", "nojanoja01", "nojanoja02");
+  private static final List<String> IMAGE_LIST =
+      Arrays.asList("shadow01", "stay01", "stay02", "throw01", "throw02",
+          "nojanoja01", "nojanoja02", "mae_ga_mienee");
   private int index = 0;
   private MODE mode = MODE.THROW;
   private Callback callback;
@@ -53,16 +49,10 @@ public class Kitsune extends AbstractMotion {
     axisShadowY = SHADOW_Y;
     fileNameShadow = SHADOW;
 
-    Class tmpClass = getClass();
-    cache =
-        CACHE_MANAGER.createCache(
-            Kitsune.class.getSimpleName(),
-            CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                String.class, Image.class, ResourcePoolsBuilder.heap(100))
-                .build());
-    for (String fileName : IMAGE_LIST) {
-      cache.put(fileName, Utils.getImageFromResources(tmpClass, fileName));
-    }
+    cache = CACHE_MANAGER.createCache(Kitsune.class.getSimpleName(), CacheConfigurationBuilder
+        .newCacheConfigurationBuilder(String.class, Image.class, ResourcePoolsBuilder.heap(100))
+        .build());
+    IMAGE_LIST.forEach(name -> cache.put(name, Utils.getImageFromResources(getClass(), name)));
 
     this.callback = callback;
     updateFileName();
@@ -119,13 +109,13 @@ public class Kitsune extends AbstractMotion {
   private void updateFileName() {
     switch (mode) {
       case THROW:
-        fileName = KITSUNE_THROW[THROW_ANIMATION[index]];
+        fileName = KITSUNE_THROW.get(THROW_ANIMATION[index]);
         break;
       case WIN:
-        fileName = KITSUNE_WIN[WIN_ANIMATION[index]];
+        fileName = KITSUNE_WIN.get(WIN_ANIMATION[index]);
         break;
       case LOSE:
-        fileName = KITSUNE_LOSE[LOSE_ANIMATION[index]];
+        fileName = KITSUNE_LOSE.get(LOSE_ANIMATION[index]);
         break;
     }
   }

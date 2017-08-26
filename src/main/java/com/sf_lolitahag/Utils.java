@@ -19,7 +19,7 @@ public class Utils {
 
     BufferedImage image = null;
     try {
-      image = ImageIO.read(Class.getResource("/" + fileName + ".png"));
+      image = ImageIO.read(Class.getResource(getFilePath(fileName)));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -28,5 +28,9 @@ public class Utils {
       System.err.println(fileName + " is not found. return null.");
     }
     return image;
+  }
+
+  private static String getFilePath(final String fileName) {
+    return "/" + fileName + ".png";
   }
 }

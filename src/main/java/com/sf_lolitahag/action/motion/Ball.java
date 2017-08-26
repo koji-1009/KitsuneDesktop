@@ -4,16 +4,17 @@ Copyright (C) 2016 Masanori Kojima
 Released under the MIT license
 http://opensource.org/licenses/mit-license.php
 */
-package com.sf_lolitahag.motions;
+package com.sf_lolitahag.action.motion;
 
 import com.sf_lolitahag.Utils;
-import com.sf_lolitahag.motions.pitchs.AbstractPitch;
-import com.sf_lolitahag.motions.pitchs.Fast;
-import com.sf_lolitahag.motions.pitchs.Liner;
-import com.sf_lolitahag.motions.pitchs.Makyu;
-import com.sf_lolitahag.motions.pitchs.Straight;
+import com.sf_lolitahag.action.pitchs.Fast;
+import com.sf_lolitahag.action.pitchs.IPitch;
+import com.sf_lolitahag.action.pitchs.Liner;
+import com.sf_lolitahag.action.pitchs.Makyu;
+import com.sf_lolitahag.action.pitchs.Straight;
 import java.awt.Image;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.Timer;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
@@ -30,29 +31,23 @@ public class Ball extends AbstractMotion {
   private static final int PAINT_INTERVAL_SPIN = 25;
   private static final int HIT_ZONE_START = 560;
   private static final int HIT_ZONE_END = 660;
-  private static final String[] BALL = {"ball01"};
-  private static final String[] BALL_SPIN = {"spin01", "spin02"};
-  private static final String[] IMAGE_LIST = {"ball01", "spin01", "spin02"};
+  private static final List<String> BALL = Collections.singletonList("ball01");
+  private static final List<String> BALL_SPIN = Arrays.asList("spin01", "spin02");
+  private static final List<String> IMAGE_LIST = Arrays.asList("ball01", "spin01", "spin02");
   private int index = 0;
   private boolean isHitZone;
   private Callback callback;
-  private AbstractPitch pitch;
+  private IPitch pitch;
   private Timer spinTimer = new Timer(PAINT_INTERVAL_SPIN, (e) -> updateSpin());
   private Timer paintTimer = new Timer(PAINT_INTERVAL, (e) -> updateBallView());
 
   public Ball(Callback callback) {
     this.callback = callback;
 
-    Class tmpClass = getClass();
-    cache =
-        CACHE_MANAGER.createCache(
-            Ball.class.getSimpleName(),
-            CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                String.class, Image.class, ResourcePoolsBuilder.heap(100))
-                .build());
-    for (String fileName : IMAGE_LIST) {
-      cache.put(fileName, Utils.getImageFromResources(tmpClass, fileName));
-    }
+    cache = CACHE_MANAGER.createCache(Ball.class.getSimpleName(), CacheConfigurationBuilder
+        .newCacheConfigurationBuilder(String.class, Image.class, ResourcePoolsBuilder.heap(100))
+        .build());
+    IMAGE_LIST.forEach(name -> cache.put(name, Utils.getImageFromResources(getClass(), name)));
 
     init();
   }
@@ -74,7 +69,7 @@ public class Ball extends AbstractMotion {
   private void init() {
     axisX = AXIS_X;
     axisY = AXIS_Y;
-    fileName = BALL[index];
+    fileName = BALL.get(index);
     isShow = false;
     isHitZone = false;
   }
@@ -105,7 +100,7 @@ public class Ball extends AbstractMotion {
     } else {
       spinTimer.stop();
       index = 0;
-      fileName = BALL[index];
+      fileName = BALL.get(index);
     }
 
     checkFinish(updateY);
@@ -126,7 +121,7 @@ public class Ball extends AbstractMotion {
     } else if (index == 1) {
       index = 0;
     }
-    fileName = BALL_SPIN[index];
+    fileName = BALL_SPIN.get(index);
   }
 
   private enum BallType {

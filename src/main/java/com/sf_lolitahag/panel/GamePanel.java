@@ -7,10 +7,10 @@ http://opensource.org/licenses/mit-license.php
 package com.sf_lolitahag.panel;
 
 import com.sf_lolitahag.Utils;
-import com.sf_lolitahag.motions.AbstractMotion;
-import com.sf_lolitahag.motions.Ball;
-import com.sf_lolitahag.motions.Batter;
-import com.sf_lolitahag.motions.Kitsune;
+import com.sf_lolitahag.action.motion.IMotion;
+import com.sf_lolitahag.action.motion.Ball;
+import com.sf_lolitahag.action.motion.Batter;
+import com.sf_lolitahag.action.motion.Kitsune;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class GamePanel extends AbstractPanel {
 
   private static final String BACK = "back";
   private static final int PAINT_INTERVAL = 30;
-  private final ArrayList<AbstractMotion> motions = new ArrayList<>();
+  private final ArrayList<IMotion> motions = new ArrayList<>();
   private final Image image;
   private Kitsune kitsune;
   private Batter batter;
