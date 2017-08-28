@@ -93,10 +93,10 @@ class Kitsune(private val callback: Callback) : AbstractMotion() {
     }
 
     private fun updateFileName() {
-        when (mode) {
-            MODE.THROW -> fileName = KITSUNE_THROW[THROW_ANIMATION[index]]
-            MODE.WIN -> fileName = KITSUNE_WIN[WIN_ANIMATION[index]]
-            MODE.LOSE -> fileName = KITSUNE_LOSE[LOSE_ANIMATION[index]]
+        fileName = when (mode) {
+            MODE.THROW -> KITSUNE_THROW[THROW_ANIMATION[index]]
+            MODE.WIN -> KITSUNE_WIN[WIN_ANIMATION[index]]
+            MODE.LOSE -> KITSUNE_LOSE[LOSE_ANIMATION[index]]
         }
     }
 

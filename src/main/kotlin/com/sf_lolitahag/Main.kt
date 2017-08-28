@@ -15,7 +15,7 @@ import javax.swing.JFrame
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants
 
-object Main : KeyListener, TitlePanel.Callback {
+object Main {
 
     private val FRAME_WIDTH = 1000
     private val FRAME_HEIGHT = 800
@@ -32,35 +32,41 @@ object Main : KeyListener, TitlePanel.Callback {
         frame = JFrame(FRAME_TITLE).apply {
             setSize(FRAME_WIDTH, FRAME_HEIGHT)
             defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-            addKeyListener(this@Main)
+            addKeyListener(key())
         }
 
-        panel = TitlePanel(this@Main)
+        panel = TitlePanel()
+        panel.setOnClickListener(changePanel())
         frame.add(panel)
 
         frame.isVisible = true
     }
 
-    override fun keyTyped(e: KeyEvent) {
-        // nop
-    }
 
-    override fun keyPressed(e: KeyEvent) {
-        when (e.keyCode) {
-            KeyEvent.VK_SPACE -> panel.onSpaceKeyPress()
+    private fun key() = object : KeyListener {
+        override fun keyTyped(e: KeyEvent) {
+            // nop
+        }
+
+        override fun keyPressed(e: KeyEvent) {
+            when (e.keyCode) {
+                KeyEvent.VK_SPACE -> panel.onSpaceKeyPress()
+            }
+        }
+
+        override fun keyReleased(e: KeyEvent) {
+            // nop
         }
     }
 
-    override fun keyReleased(e: KeyEvent) {
-        // nop
-    }
-
-    override fun gotoGamePanel() {
-        frame.remove(panel)
-        panel = GamePanel()
-        frame.run {
-            add(panel)
-            isVisible = true
+    private fun changePanel() = object : AbstractPanel.ClickListener {
+        override fun onClick() {
+            frame.remove(panel)
+            panel = GamePanel()
+            frame.run {
+                add(panel)
+                isVisible = true
+            }
         }
     }
 }

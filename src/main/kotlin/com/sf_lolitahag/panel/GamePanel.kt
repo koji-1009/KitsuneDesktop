@@ -27,6 +27,7 @@ class GamePanel : AbstractPanel(), Kitsune.Callback, Ball.Callback {
 
     init {
         Timer(PAINT_INTERVAL) { repaint() }.start()
+        setOnClickListener(listener = startSwing())
     }
 
     override fun paintComponent(g: Graphics) {
@@ -39,10 +40,6 @@ class GamePanel : AbstractPanel(), Kitsune.Callback, Ball.Callback {
         }
     }
 
-    override fun onSpaceKeyPress() {
-        batter.startSwing(ball.isHit)
-    }
-
     override fun onFinishThrow() {
         ball.startPitch()
     }
@@ -50,4 +47,12 @@ class GamePanel : AbstractPanel(), Kitsune.Callback, Ball.Callback {
     override fun onFinishPitch(isWin: Boolean) {
         kitsune.showWinOrLosePose(isWin)
     }
+
+    private fun startSwing() = object : AbstractPanel.ClickListener {
+        override fun onClick() {
+            batter.startSwing(ball.isHit)
+        }
+    }
+
+
 }

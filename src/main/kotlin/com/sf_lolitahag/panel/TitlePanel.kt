@@ -9,20 +9,11 @@ package com.sf_lolitahag.panel
 import com.sf_lolitahag.Utils
 import java.awt.Graphics
 
-class TitlePanel(private val callback: Callback) : AbstractPanel() {
+class TitlePanel : AbstractPanel() {
 
     private val TITLE = "title"
 
     override fun paintComponent(g: Graphics) {
         g.drawImage(Utils.getImageFromResources(javaClass, TITLE), 0, 0, null)
-    }
-
-    override fun onSpaceKeyPress() {
-        callback.gotoGamePanel()
-    }
-
-    interface Callback {
-
-        fun gotoGamePanel()
     }
 }

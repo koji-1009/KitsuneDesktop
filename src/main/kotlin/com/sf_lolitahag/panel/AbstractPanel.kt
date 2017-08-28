@@ -13,5 +13,17 @@ import javax.swing.JPanel
  */
 abstract class AbstractPanel : JPanel() {
 
-    abstract fun onSpaceKeyPress()
+    private var listener: ClickListener? = null
+
+    fun onSpaceKeyPress() {
+        listener?.onClick()
+    }
+
+    fun setOnClickListener(listener: ClickListener) {
+        this.listener = listener
+    }
+
+    interface ClickListener {
+        fun onClick()
+    }
 }
