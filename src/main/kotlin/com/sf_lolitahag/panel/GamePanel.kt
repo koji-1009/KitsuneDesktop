@@ -16,8 +16,10 @@ import javax.swing.Timer
 
 class GamePanel : AbstractPanel(), Kitsune.Callback, Ball.Callback {
 
-    private val BACK = "back"
-    private val PAINT_INTERVAL = 30
+    companion object {
+        private const val BACK = "back"
+        private const val PAINT_INTERVAL = 30
+    }
 
     private val image = Utils.getImageFromResources(javaClass, BACK)
     private val kitsune = Kitsune(this)

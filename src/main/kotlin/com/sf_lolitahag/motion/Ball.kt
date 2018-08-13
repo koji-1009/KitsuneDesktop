@@ -13,20 +13,19 @@ import org.ehcache.config.builders.ResourcePoolsBuilder
 import java.awt.Image
 import javax.swing.Timer
 
-/**
- * ボール実装
- */
 class Ball(private val callback: Callback) : AbstractMotion() {
 
-    private val AXIS_X = 475
-    private val AXIS_Y = 245
-    private val PAINT_INTERVAL = 40
-    private val PAINT_INTERVAL_SPIN = 25
-    private val HIT_ZONE_START = 560
-    private val HIT_ZONE_END = 660
-    private val BALL = listOf("ball01")
-    private val BALL_SPIN = listOf("spin01", "spin02")
-    private val IMAGE_LIST = listOf("ball01", "spin01", "spin02")
+    companion object {
+        private const val AXIS_X = 475
+        private const val AXIS_Y = 245
+        private const val PAINT_INTERVAL = 40
+        private const val PAINT_INTERVAL_SPIN = 25
+        private const val HIT_ZONE_START = 560
+        private const val HIT_ZONE_END = 660
+        private val BALL = listOf("ball01")
+        private val BALL_SPIN = listOf("spin01", "spin02")
+        private val IMAGE_LIST = listOf("ball01", "spin01", "spin02")
+    }
 
     private var index = 0
     private var isHitZone: Boolean = false
@@ -35,7 +34,7 @@ class Ball(private val callback: Callback) : AbstractMotion() {
     private val paintTimer = Timer(PAINT_INTERVAL) { updateBallView() }
 
     init {
-        cache = CACHE_MANAGER.createCache(Ball::class.java.simpleName, CacheConfigurationBuilder
+        cache = cacheManager.createCache(Ball::class.java.simpleName, CacheConfigurationBuilder
                 .newCacheConfigurationBuilder(String::class.java, Image::class.java, ResourcePoolsBuilder.heap(100))
                 .build())
         IMAGE_LIST.forEach { name -> cache.put(name, Utils.getImageFromResources(javaClass, name)) }
@@ -67,10 +66,10 @@ class Ball(private val callback: Callback) : AbstractMotion() {
     }
 
     private fun getPitchRand() {
-        when (BallType.ballType) {
-            BallType.STRAIGHT -> pitch = Straight()
-            BallType.FAST -> pitch = Fast()
-            BallType.MAKYU -> pitch = Makyu()
+        pitch = when (BallType.ballType) {
+            BallType.STRAIGHT -> Straight()
+            BallType.FAST -> Fast()
+            BallType.MAKYU -> Makyu()
         }
     }
 
@@ -79,7 +78,7 @@ class Ball(private val callback: Callback) : AbstractMotion() {
         axisX += updateX
         val updateY = pitch!!.getUpdateY(axisY)
         axisY += updateY
-        isHitZone = axisY >= HIT_ZONE_START && axisY <= HIT_ZONE_END
+        isHitZone = axisY in HIT_ZONE_START..HIT_ZONE_END
 
         if (pitch!!.isSpin) {
             spinTimer.start()

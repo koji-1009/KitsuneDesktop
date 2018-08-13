@@ -17,9 +17,9 @@ import javax.swing.WindowConstants
 
 object Main {
 
-    private val FRAME_WIDTH = 1000
-    private val FRAME_HEIGHT = 800
-    private val FRAME_TITLE = "ロリのバーさんのホームランダービー"
+    private const val FRAME_WIDTH = 1000
+    private const val FRAME_HEIGHT = 800
+    private const val FRAME_TITLE = "ロリのバーさんのホームランダービー"
     private lateinit var frame: JFrame
     private lateinit var panel: AbstractPanel
 
@@ -41,7 +41,6 @@ object Main {
 
         frame.isVisible = true
     }
-
 
     private fun key() = object : KeyListener {
         override fun keyTyped(e: KeyEvent) {

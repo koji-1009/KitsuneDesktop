@@ -17,14 +17,11 @@ object Utils {
             return null
         }
 
-        var image: BufferedImage? = null
-        try {
-            image = ImageIO.read(Class.getResource("/$fileName.png"))
+        return try {
+            ImageIO.read(Class.getResource("/$fileName.png"))
         } catch (e: IOException) {
             e.printStackTrace()
-            System.err.println(fileName + " is not found. return null.")
+            null
         }
-
-        return image
     }
 }

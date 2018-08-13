@@ -10,6 +10,6 @@ interface IPitch {
 
     companion object {
 
-        val NONE = 0
+        const val NONE = 0
     }
 }

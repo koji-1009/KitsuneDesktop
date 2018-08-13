@@ -8,10 +8,13 @@ package com.sf_lolitahag.pitchs
 
 class Makyu : IPitch {
 
-    private val BALL_SPEED = 20
-    private val ACCELERATION = 20
-    private val STOP_POSITION = 400
-    private val STOP_TIME: Long = 1000
+    companion object {
+
+        private const val BALL_SPEED = 20
+        private const val ACCELERATION = 20
+        private const val STOP_POSITION = 400
+        private const val STOP_TIME = 1000L
+    }
 
     override var isSpin: Boolean = false
         private set

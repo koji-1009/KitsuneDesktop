@@ -12,20 +12,19 @@ import org.ehcache.config.builders.ResourcePoolsBuilder
 import java.awt.Image
 import javax.swing.Timer
 
-/**
- * バッター実装
- */
 class Batter : AbstractMotion() {
 
-    private val AXIS_X = 200
-    private val AXIS_Y = 475
-    private val SHADOW_X = 300
-    private val SHADOW_Y = 680
-    private val PAINT_INTERVAL = 100
-    private val SHADOW = "shadow01"
-    private val BATTER_MISS = listOf("batter01", "batter04", "batter03", "batter01")
-    private val BATTER_HIT = listOf("batter01", "batter02", "batter03", "batter01")
-    private val IMAGE_LIST = listOf("shadow01", "batter01", "batter02", "batter03", "batter04")
+    companion object {
+        private const val AXIS_X = 200
+        private const val AXIS_Y = 475
+        private const val SHADOW_X = 300
+        private const val SHADOW_Y = 680
+        private const val PAINT_INTERVAL = 100
+        private const val SHADOW = "shadow01"
+        private val BATTER_MISS = listOf("batter01", "batter04", "batter03", "batter01")
+        private val BATTER_HIT = listOf("batter01", "batter02", "batter03", "batter01")
+        private val IMAGE_LIST = listOf("shadow01", "batter01", "batter02", "batter03", "batter04")
+    }
 
     private var index = 0
     private var isHit: Boolean = false
@@ -38,7 +37,7 @@ class Batter : AbstractMotion() {
         axisShadowY = SHADOW_Y
         fileNameShadow = SHADOW
 
-        cache = CACHE_MANAGER.createCache(Batter::class.java.simpleName, CacheConfigurationBuilder
+        cache = cacheManager.createCache(Batter::class.java.simpleName, CacheConfigurationBuilder
                 .newCacheConfigurationBuilder(String::class.java, Image::class.java, ResourcePoolsBuilder.heap(100))
                 .build())
         IMAGE_LIST.forEach { name -> cache.put(name, Utils.getImageFromResources(javaClass, name)) }

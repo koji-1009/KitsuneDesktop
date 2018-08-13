@@ -8,9 +8,6 @@ package com.sf_lolitahag.panel
 
 import javax.swing.JPanel
 
-/**
- * 表示するパネルのBaseクラス SpaceKeyを押した場合の処理を継承クラスで実装する
- */
 abstract class AbstractPanel : JPanel() {
 
     private var listener: ClickListener? = null
@@ -19,7 +16,7 @@ abstract class AbstractPanel : JPanel() {
         listener?.onClick()
     }
 
-    fun setOnClickListener(listener: ClickListener) {
+    fun setOnClickListener(listener: ClickListener?) {
         this.listener = listener
     }
 

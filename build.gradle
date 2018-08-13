@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.1.4-2'
+    ext.kotlin_version = '1.2.60'
 
     repositories {
         mavenCentral()
@@ -20,8 +20,6 @@ apply plugin: 'jacoco'
 
 defaultTasks 'clean', 'build'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 version = "1.0"
 
 repositories {
@@ -60,8 +58,8 @@ sourceSets {
 
 jacocoTestReport {
     reports {
-        xml.enabled false
-        csv.enabled false
+        xml.enabled = false
+        csv.enabled = false
         html.destination file("${buildDir}/jacocoHtml")
     }
 }

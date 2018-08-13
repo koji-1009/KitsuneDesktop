@@ -8,7 +8,9 @@ package com.sf_lolitahag.pitchs
 
 class Liner : IPitch {
 
-    private val BALL_SPEED = -80
+    companion object {
+        private const val BALL_SPEED = -80
+    }
 
     override fun getUpdateX(currentX: Int): Int = IPitch.NONE
 

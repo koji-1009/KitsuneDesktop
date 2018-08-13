@@ -8,7 +8,9 @@ package com.sf_lolitahag.pitchs
 
 class Straight : IPitch {
 
-    private val BALL_SPEED = 20
+    companion object {
+        private const val BALL_SPEED = 20
+    }
 
     override fun getUpdateX(currentX: Int): Int = IPitch.NONE
 

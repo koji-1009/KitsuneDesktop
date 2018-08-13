@@ -12,25 +12,24 @@ import org.ehcache.config.builders.ResourcePoolsBuilder
 import java.awt.Image
 import javax.swing.Timer
 
-/**
- * きつね（ロリババア）実装
- */
 class Kitsune(private val callback: Callback) : AbstractMotion() {
 
-    private val AXIS_X = 400
-    private val AXIS_Y = 100
-    private val SHADOW_X = 400
-    private val SHADOW_Y = 300
-    private val PAINT_INTERVAL = 400
-    private val THROW_ANIMATION = intArrayOf(0, 1, 0, 1, 2, 3)
-    private val WIN_ANIMATION = intArrayOf(0, 1, 0, 1, 0, 1)
-    private val LOSE_ANIMATION = intArrayOf(0)
-    private val SHADOW = "shadow01"
-    private val KITSUNE_LOSE = listOf("mae_ga_mienee")
-    private val KITSUNE_THROW = listOf("stay01", "stay02", "throw01", "throw02")
-    private val KITSUNE_WIN = listOf("nojanoja01", "nojanoja02", "nojanoja01", "nojanoja02")
-    private val IMAGE_LIST = listOf("shadow01", "stay01", "stay02", "throw01", "throw02",
-            "nojanoja01", "nojanoja02", "mae_ga_mienee")
+    companion object {
+        private const val AXIS_X = 400
+        private const val AXIS_Y = 100
+        private const val SHADOW_X = 400
+        private const val SHADOW_Y = 300
+        private const val PAINT_INTERVAL = 400
+        private val THROW_ANIMATION = intArrayOf(0, 1, 0, 1, 2, 3)
+        private val WIN_ANIMATION = intArrayOf(0, 1, 0, 1, 0, 1)
+        private val LOSE_ANIMATION = intArrayOf(0)
+        private const val SHADOW = "shadow01"
+        private val KITSUNE_LOSE = listOf("mae_ga_mienee")
+        private val KITSUNE_THROW = listOf("stay01", "stay02", "throw01", "throw02")
+        private val KITSUNE_WIN = listOf("nojanoja01", "nojanoja02", "nojanoja01", "nojanoja02")
+        private val IMAGE_LIST = listOf("shadow01", "stay01", "stay02", "throw01", "throw02",
+                "nojanoja01", "nojanoja02", "mae_ga_mienee")
+    }
 
     private var index = 0
     private var mode = MODE.THROW
@@ -43,7 +42,7 @@ class Kitsune(private val callback: Callback) : AbstractMotion() {
         axisShadowY = SHADOW_Y
         fileNameShadow = SHADOW
 
-        cache = CACHE_MANAGER.createCache(Kitsune::class.java.simpleName, CacheConfigurationBuilder
+        cache = cacheManager.createCache(Kitsune::class.java.simpleName, CacheConfigurationBuilder
                 .newCacheConfigurationBuilder(String::class.java, Image::class.java, ResourcePoolsBuilder.heap(100))
                 .build())
         IMAGE_LIST.forEach { name -> cache.put(name, Utils.getImageFromResources(javaClass, name)) }
@@ -52,10 +51,10 @@ class Kitsune(private val callback: Callback) : AbstractMotion() {
     }
 
     fun showWinOrLosePose(isWin: Boolean) {
-        if (isWin) {
-            mode = MODE.WIN
+        mode = if (isWin) {
+            MODE.WIN
         } else {
-            mode = MODE.LOSE
+            MODE.LOSE
         }
         updateFileName()
         timer.start()

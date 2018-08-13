@@ -11,7 +11,9 @@ import java.awt.Graphics
 
 class TitlePanel : AbstractPanel() {
 
-    private val TITLE = "title"
+    companion object {
+        private const val TITLE = "title"
+    }
 
     override fun paintComponent(g: Graphics) {
         g.drawImage(Utils.getImageFromResources(javaClass, TITLE), 0, 0, null)
